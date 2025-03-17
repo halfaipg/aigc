@@ -1,5 +1,34 @@
 // AI General Concepts LTD - Main JavaScript
 
+// Function to open email client
+function openMailClient(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const company = document.getElementById('company').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Encode values for mailto link
+    const subject = encodeURIComponent(`Contact from ${name} at ${company}`);
+    const body = encodeURIComponent(`Message:\n${message}\n\nReply to: ${email}`);
+    
+    // Generate mailto link
+    const mailtoLink = `mailto:contact@generalconcepts.ai?subject=${subject}&body=${body}`;
+    
+    // Update form status
+    const formStatus = document.getElementById('formStatus');
+    formStatus.className = 'form-status';
+    formStatus.textContent = 'Opening your email client...';
+    formStatus.style.display = 'block';
+    
+    // Open mailto link
+    window.location.href = mailtoLink;
+    
+    return false;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -30,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Contact form submission
+    // Contact form submission to Power Automate
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     
@@ -38,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Basic validation
+            // Validation
             let isValid = true;
             const formElements = this.elements;
             
@@ -60,37 +89,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            if (isValid) {
-                const formData = new FormData(contactForm);
-                
-                // Clear any previous status
-                formStatus.className = 'form-status';
-                formStatus.textContent = 'Sending your message...';
-                formStatus.style.display = 'block';
-                
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        formStatus.className = 'form-status success';
-                        formStatus.textContent = 'Thank you! Your message has been sent.';
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                })
-                .catch(error => {
-                    formStatus.className = 'form-status error';
-                    formStatus.textContent = 'There was a problem sending your message. Please try again later.';
-                    console.error('Error:', error);
-                });
-            } else {
+            if (!isValid) {
                 formStatus.className = 'form-status error';
                 formStatus.textContent = 'Please fill in all required fields correctly.';
                 formStatus.style.display = 'block';
+                return;
             }
+            
+            // Prepare form data
+            const formData = {
+                name: document.getElementById('name').value,
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Show sending message
+            formStatus.className = 'form-status';
+            formStatus.textContent = 'Sending your message...';
+            formStatus.style.display = 'block';
+            
+            // Send to Power Automate
+            fetch(contactForm.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                // Power Automate might not return JSON
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    return response.json().then(data => {
+                        return { success: true, message: data.message || 'Thank you! Your message has been sent.' };
+                    });
+                } else {
+                    return { success: true, message: 'Thank you! Your message has been sent.' };
+                }
+            })
+            .then(data => {
+                formStatus.className = 'form-status success';
+                formStatus.textContent = data.message;
+                contactForm.reset();
+            })
+            .catch(error => {
+                // Fallback to mailto if Power Automate fails
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'There was a problem with the form submission. Opening email client instead...';
+                console.error('Error:', error);
+                
+                // Delay to let user see the message before opening mailto
+                setTimeout(() => {
+                    // Get form values for mailto fallback
+                    const name = document.getElementById('name').value;
+                    const company = document.getElementById('company').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Encode values for mailto link
+                    const subject = encodeURIComponent(`Contact from ${name} at ${company}`);
+                    const body = encodeURIComponent(`Message:\n${message}\n\nReply to: ${email}`);
+                    
+                    // Generate mailto link
+                    const mailtoLink = `mailto:contact@generalconcepts.ai?subject=${subject}&body=${body}`;
+                    
+                    // Open mailto link
+                    window.location.href = mailtoLink;
+                }, 2000);
+            });
         });
     }
 }); 
