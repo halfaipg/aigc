@@ -138,29 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 contactForm.reset();
             })
             .catch(error => {
-                // Fallback to mailto if Power Automate fails
                 formStatus.className = 'form-status error';
-                formStatus.textContent = 'There was a problem with the form submission. Opening email client instead...';
+                formStatus.textContent = 'There was a problem sending your message. Please try again later or email us directly.';
                 console.error('Error:', error);
-                
-                // Delay to let user see the message before opening mailto
-                setTimeout(() => {
-                    // Get form values for mailto fallback
-                    const name = document.getElementById('name').value;
-                    const company = document.getElementById('company').value;
-                    const email = document.getElementById('email').value;
-                    const message = document.getElementById('message').value;
-                    
-                    // Encode values for mailto link
-                    const subject = encodeURIComponent(`Contact from ${name} at ${company}`);
-                    const body = encodeURIComponent(`Message:\n${message}\n\nReply to: ${email}`);
-                    
-                    // Generate mailto link
-                    const mailtoLink = `mailto:contact@generalconcepts.ai?subject=${subject}&body=${body}`;
-                    
-                    // Open mailto link
-                    window.location.href = mailtoLink;
-                }, 2000);
             });
         });
     }
