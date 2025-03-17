@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Simple form validation
-    const contactForm = document.querySelector('.contact-form form');
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -60,11 +61,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             if (isValid) {
-                // In a real implementation, you would send the form data to a server
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
+                const formData = new FormData(contactForm);
+                
+                // Clear any previous status
+                formStatus.className = 'form-status';
+                formStatus.textContent = 'Sending your message...';
+                formStatus.style.display = 'block';
+                
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        formStatus.className = 'form-status success';
+                        formStatus.textContent = 'Thank you! Your message has been sent.';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = 'There was a problem sending your message. Please try again later.';
+                    console.error('Error:', error);
+                });
             } else {
-                alert('Please fill in all required fields correctly.');
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Please fill in all required fields correctly.';
+                formStatus.style.display = 'block';
             }
         });
     }

@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm" action="https://prod-169.westeurope.logic.azure.com/workflows/YOUR_POWER_AUTOMATE_URL" method="POST">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -201,6 +201,7 @@
                             <textarea id="message" name="message" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div id="formStatus" class="form-status"></div>
                     </form>
                 </div>
             </div>
