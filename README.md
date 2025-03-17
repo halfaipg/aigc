@@ -40,7 +40,7 @@ Since this is a static website, no build process or server setup is required.
 
 The following image assets are needed:
 
-- `images/about-image.jpg` - Image for the About section
+- `images/about-image.png` - Image for the About section
 - `images/icon-consulting.svg` - Icon for AI Strategy Consulting
 - `images/icon-rag.svg` - Icon for RAG Implementation
 - `images/icon-integration.svg` - Icon for System Integration

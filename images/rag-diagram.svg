@@ -38,13 +38,14 @@
             <path d="M60,80 C60,90 70,90 70,80 C70,70 80,70 80,80 C80,90 90,90 90,80 C90,70 100,70 100,80 C100,90 110,90 110,80 C110,70 120,70 120,80 C120,90 130,90 130,80" stroke="#7c3aed" stroke-width="3" fill="none"/>
         </g>
         
-        <!-- Response -->
+        <!-- Response - Updated with line break -->
         <g transform="translate(580, 160)">
             <rect width="120" height="160" rx="10" ry="10" fill="#f0fdf4" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
-            <text x="60" y="60" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Accurate Response</text>
-            <rect x="20" y="80" width="80" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
-            <rect x="20" y="100" width="60" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
-            <rect x="20" y="120" width="70" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+            <text x="60" y="50" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Accurate</text>
+            <text x="60" y="75" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Response</text>
+            <rect x="20" y="90" width="80" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+            <rect x="20" y="110" width="60" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+            <rect x="20" y="130" width="70" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
         </g>
     </g>
     
@@ -69,9 +70,9 @@
     
     <!-- Labels -->
     <g id="labels" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">
-        <text x="240" y="165" text-anchor="middle">Retrieves</text>
-        <text x="400" y="225" text-anchor="middle">Enhances</text>
-        <text x="530" y="285" text-anchor="middle">Generates</text>
+        <text x="255" y="195" text-anchor="middle">Retrieve</text>
+        <text x="440" y="225" text-anchor="middle">Enhance</text>
+        <text x="535" y="315" text-anchor="middle">Generate</text>
     </g>
     
     <!-- Title -->

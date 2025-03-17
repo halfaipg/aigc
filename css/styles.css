@@ -195,6 +195,16 @@ section {
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--box-shadow);
+  position: relative;
+  line-height: 0;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+  border-radius: var(--border-radius);
 }
 
 /* Services Section */
