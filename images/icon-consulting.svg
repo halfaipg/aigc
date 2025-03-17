@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Main circle -->
+    <circle cx="30" cy="30" r="28" fill="white" stroke="url(#gradient)" stroke-width="2"/>
+    
+    <!-- Lightbulb -->
+    <path d="M30,10 C23.4,10 18,15.4 18,22 C18,26.2 20.3,30 24,32 L24,38 C24,39.1 24.9,40 26,40 L34,40 C35.1,40 36,39.1 36,38 L36,32 C39.7,30 42,26.2 42,22 C42,15.4 36.6,10 30,10 Z" fill="none" stroke="url(#gradient)" stroke-width="2"/>
+    
+    <!-- Filament -->
+    <path d="M27,32 L27,36 L33,36 L33,32" fill="none" stroke="url(#gradient)" stroke-width="2"/>
+    
+    <!-- Base -->
+    <path d="M26,40 L34,40 L34,44 C34,45.1 33.1,46 32,46 L28,46 C26.9,46 26,45.1 26,44 L26,40 Z" fill="url(#gradient)"/>
+    
+    <!-- Shine lines -->
+    <path d="M30,5 L30,8" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M40,10 L43,7" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M45,20 L48,20" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M20,10 L17,7" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M15,20 L12,20" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"/>
+</svg> 

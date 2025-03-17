@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+        </linearGradient>
+        <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+        </filter>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="800" height="400" fill="#f9fafb" rx="10" ry="10"/>
+    
+    <!-- Main Components -->
+    <g id="components">
+        <!-- Your Data -->
+        <g transform="translate(100, 160)">
+            <rect width="120" height="160" rx="10" ry="10" fill="#e0f2fe" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
+            <text x="60" y="60" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Your Data</text>
+            <rect x="20" y="80" width="80" height="10" rx="2" ry="2" fill="#2563eb" opacity="0.6"/>
+            <rect x="20" y="100" width="60" height="10" rx="2" ry="2" fill="#2563eb" opacity="0.6"/>
+            <rect x="20" y="120" width="70" height="10" rx="2" ry="2" fill="#2563eb" opacity="0.6"/>
+        </g>
+        
+        <!-- Retrieval System -->
+        <g transform="translate(300, 80)">
+            <rect width="200" height="120" rx="10" ry="10" fill="#f0f9ff" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
+            <text x="100" y="40" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Retrieval System</text>
+            <circle cx="70" cy="80" r="20" fill="#2563eb" opacity="0.2"/>
+            <circle cx="130" cy="80" r="20" fill="#2563eb" opacity="0.2"/>
+        </g>
+        
+        <!-- LLM -->
+        <g transform="translate(300, 240)">
+            <rect width="200" height="120" rx="10" ry="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" filter="url(#shadow)"/>
+            <text x="100" y="40" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Large Language Model</text>
+            <path d="M60,80 C60,90 70,90 70,80 C70,70 80,70 80,80 C80,90 90,90 90,80 C90,70 100,70 100,80 C100,90 110,90 110,80 C110,70 120,70 120,80 C120,90 130,90 130,80" stroke="#7c3aed" stroke-width="3" fill="none"/>
+        </g>
+        
+        <!-- Response -->
+        <g transform="translate(580, 160)">
+            <rect width="120" height="160" rx="10" ry="10" fill="#f0fdf4" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+            <text x="60" y="60" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">Accurate Response</text>
+            <rect x="20" y="80" width="80" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+            <rect x="20" y="100" width="60" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+            <rect x="20" y="120" width="70" height="10" rx="2" ry="2" fill="#10b981" opacity="0.6"/>
+        </g>
+    </g>
+    
+    <!-- Arrows -->
+    <g id="arrows" stroke="#6b7280" stroke-width="2" fill="none">
+        <!-- Your Data to Retrieval -->
+        <path d="M230,180 C260,180 260,140 290,140" marker-end="url(#arrowhead)"/>
+        
+        <!-- Retrieval to LLM -->
+        <line x1="400" y1="200" x2="400" y2="240" marker-end="url(#arrowhead)"/>
+        
+        <!-- LLM to Response -->
+        <path d="M510,300 C540,300 540,240 570,240" marker-end="url(#arrowhead)"/>
+    </g>
+    
+    <!-- Arrowhead Marker -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+        </marker>
+    </defs>
+    
+    <!-- Labels -->
+    <g id="labels" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">
+        <text x="240" y="165" text-anchor="middle">Retrieves</text>
+        <text x="400" y="225" text-anchor="middle">Enhances</text>
+        <text x="530" y="285" text-anchor="middle">Generates</text>
+    </g>
+    
+    <!-- Title -->
+    <text x="400" y="30" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="url(#grad1)" text-anchor="middle">Retrieval Augmented Generation (RAG)</text>
+</svg> 
