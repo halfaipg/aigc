@@ -287,6 +287,64 @@ section {
   text-align: center;
 }
 
+/* Implementation Roadmap Section */
+.roadmap {
+  background-color: var(--light-bg);
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.roadmap-item {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.roadmap-item:hover {
+  transform: translateY(-5px);
+}
+
+.roadmap-number {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.roadmap-content {
+  padding-top: 1rem;
+}
+
+.roadmap-content h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.roadmap-content p {
+  color: var(--text-light);
+  margin-bottom: 0;
+}
+
 /* Case Studies */
 .case-studies {
   background-color: var(--light-bg);
