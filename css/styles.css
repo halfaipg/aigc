@@ -144,6 +144,15 @@ section {
   max-width: 100%;
 }
 
+.logo-text {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-left: 12px;
+  letter-spacing: 0.5px;
+}
+
 .nav ul {
   display: flex;
   gap: 2rem;
@@ -351,6 +360,79 @@ section {
 .roadmap-content p {
   color: var(--text-light);
   margin-bottom: 0;
+}
+
+/* Feature Sections */
+.feature-section {
+  background-color: var(--white);
+  padding: var(--section-padding);
+}
+
+.feature-section.alt {
+  background-color: var(--light-bg);
+}
+
+.feature-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.feature-text h3 {
+  margin: 2rem 0 1rem;
+  color: var(--text-color);
+}
+
+.feature-text h3:first-child {
+  margin-top: 0;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.feature-list li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.feature-list li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+.feature-diagram {
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background: var(--white);
+  padding: 2rem;
+}
+
+.feature-diagram img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 992px) {
+  .feature-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .feature-diagram {
+    grid-row: 1;
+  }
 }
 
 /* Case Studies */
@@ -628,4 +710,15 @@ section {
   .case-studies-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.omnivox-widget {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.omnivox-widget-container {
+    background: transparent !important;
+    box-shadow: none !important;
 } 

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Main circle -->
+    <circle cx="30" cy="30" r="28" fill="white" stroke="url(#gradient)" stroke-width="2"/>
+    
+    <!-- Neural network with varying opacity -->
+    <circle cx="30" cy="15" r="4" fill="url(#gradient)" fill-opacity="0.3"/>
+    <circle cx="20" cy="25" r="4" fill="url(#gradient)" fill-opacity="0.4"/>
+    <circle cx="40" cy="25" r="4" fill="url(#gradient)" fill-opacity="0.4"/>
+    <circle cx="15" cy="35" r="4" fill="url(#gradient)" fill-opacity="0.6"/>
+    <circle cx="30" cy="35" r="4" fill="url(#gradient)" fill-opacity="0.6"/>
+    <circle cx="45" cy="35" r="4" fill="url(#gradient)" fill-opacity="0.6"/>
+    <circle cx="30" cy="45" r="4" fill="url(#gradient)" fill-opacity="1.0"/>
+    
+    <!-- Connections with varying opacity -->
+    <path d="M30,19 L20,21" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.3"/>
+    <path d="M30,19 L40,21" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.3"/>
+    <path d="M20,29 L15,31" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.5"/>
+    <path d="M20,29 L30,31" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.5"/>
+    <path d="M40,29 L30,31" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.5"/>
+    <path d="M40,29 L45,31" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.5"/>
+    <path d="M15,39 L30,41" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.8"/>
+    <path d="M30,39 L30,41" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.8"/>
+    <path d="M45,39 L30,41" stroke="url(#gradient)" stroke-width="2" stroke-opacity="0.8"/>
+</svg>
