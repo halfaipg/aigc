@@ -1,115 +1,134 @@
 // AI General Concepts LTD - Main JavaScript
 
-// Function to open email client
-function openMailClient(event) {
-    event.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const company = document.getElementById('company').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Encode values for mailto link
-    const subject = encodeURIComponent(`Contact from ${name} at ${company}`);
-    const body = encodeURIComponent(`Message:\n${message}\n\nReply to: ${email}`);
-    
-    // Generate mailto link
-    const mailtoLink = `mailto:contact@generalconcepts.ai?subject=${subject}&body=${body}`;
-    
-    // Update form status
-    const formStatus = document.getElementById('formStatus');
-    formStatus.className = 'form-status';
-    formStatus.textContent = 'Opening your email client...';
-    formStatus.style.display = 'block';
-    
-    // Open mailto link
-    window.location.href = mailtoLink;
-    
-    return false;
-}
+document.documentElement.classList.add('js');
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Account for fixed header
-                    behavior: 'smooth'
-                });
-            }
+document.addEventListener('DOMContentLoaded', function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Mobile navigation toggle
+    var header = document.querySelector('.header');
+    var navToggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('siteNav');
+
+    if (navToggle && header && nav) {
+        navToggle.addEventListener('click', function () {
+            var isOpen = header.classList.toggle('nav-open');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
-    });
 
-    // Header scroll effect
-    const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.backgroundColor = 'var(--white)';
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        }
-    });
+        nav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
 
-    // Contact form submission to Power Automate
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validation
-            let isValid = true;
-            const formElements = this.elements;
-            
-            for (let i = 0; i < formElements.length; i++) {
-                if (formElements[i].hasAttribute('required') && !formElements[i].value.trim()) {
-                    isValid = false;
-                    formElements[i].style.borderColor = 'red';
-                } else if (formElements[i].type === 'email' && formElements[i].value.trim()) {
-                    // Simple email validation
-                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailPattern.test(formElements[i].value.trim())) {
-                        isValid = false;
-                        formElements[i].style.borderColor = 'red';
-                    } else {
-                        formElements[i].style.borderColor = 'var(--border-color)';
-                    }
-                } else {
-                    formElements[i].style.borderColor = 'var(--border-color)';
+    // Scroll reveal (IntersectionObserver; degrades to visible)
+    var revealEls = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    } else {
+        var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
                 }
-            }
-            
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+        var revealInView = function () {
+            revealEls.forEach(function (el) {
+                if (el.classList.contains('is-visible')) { return; }
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('is-visible');
+                    revealObserver.unobserve(el);
+                }
+            });
+        };
+
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+        // Anchor deep-links scroll the page outside the observer's notice
+        // (the browser jumps to the fragment after load), so re-check
+        // whenever a jump can have happened.
+        revealInView();
+        window.addEventListener('load', revealInView);
+        window.addEventListener('hashchange', revealInView);
+        window.addEventListener('scroll', revealInView, { passive: true });
+    }
+
+    // Scrollspy: highlight the nav link for the section in view
+    var navLinks = document.querySelectorAll('.nav a[href^="#"]:not(.btn)');
+    if ('IntersectionObserver' in window && navLinks.length) {
+        var linkById = {};
+        navLinks.forEach(function (link) {
+            linkById[link.getAttribute('href').slice(1)] = link;
+        });
+        var spyObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var link = linkById[entry.target.id];
+                if (!link) { return; }
+                if (entry.isIntersecting) {
+                    navLinks.forEach(function (l) { l.classList.remove('active'); });
+                    link.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        Object.keys(linkById).forEach(function (id) {
+            var section = document.getElementById(id);
+            if (section) { spyObserver.observe(section); }
+        });
+    }
+
+    // Contact form: POSTs JSON to the contact relay worker
+    var contactForm = document.getElementById('contactForm');
+    var formStatus = document.getElementById('formStatus');
+
+    if (contactForm && formStatus) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Inline validation
+            var isValid = true;
+            var fields = contactForm.querySelectorAll('input[required], textarea[required]');
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            fields.forEach(function (field) {
+                var value = field.value.trim();
+                var fieldValid = value.length > 0;
+                if (fieldValid && field.type === 'email') {
+                    fieldValid = emailPattern.test(value);
+                }
+                field.classList.toggle('invalid', !fieldValid);
+                if (!fieldValid) { isValid = false; }
+            });
+
             if (!isValid) {
                 formStatus.className = 'form-status error';
                 formStatus.textContent = 'Please fill in all required fields correctly.';
                 formStatus.style.display = 'block';
                 return;
             }
-            
-            // Prepare form data
-            const formData = {
+
+            var formData = {
+                site: 'generalconcepts.ai',
                 name: document.getElementById('name').value,
                 company: document.getElementById('company').value,
                 email: document.getElementById('email').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                website: contactForm.querySelector('input[name="website"]') ? contactForm.querySelector('input[name="website"]').value : ''
             };
-            
-            // Show sending message
-            formStatus.className = 'form-status';
+
+            var submitBtn = contactForm.querySelector('button[type="submit"]');
+            if (submitBtn) { submitBtn.disabled = true; }
+
+            formStatus.className = 'form-status sending';
             formStatus.textContent = 'Sending your message...';
             formStatus.style.display = 'block';
-            
-            // Send to Power Automate
+
             fetch(contactForm.action, {
                 method: 'POST',
                 headers: {
@@ -117,31 +136,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(function (response) {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                
-                // Power Automate might not return JSON
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.indexOf("application/json") !== -1) {
-                    return response.json().then(data => {
-                        return { success: true, message: data.message || 'Thank you! Your message has been sent.' };
+                var contentType = response.headers.get('content-type');
+                if (contentType && contentType.indexOf('application/json') !== -1) {
+                    return response.json().then(function (data) {
+                        return { message: data.message || 'Thank you. Your message has been sent.' };
                     });
-                } else {
-                    return { success: true, message: 'Thank you! Your message has been sent.' };
                 }
+                return { message: 'Thank you. Your message has been sent.' };
             })
-            .then(data => {
+            .then(function (data) {
                 formStatus.className = 'form-status success';
                 formStatus.textContent = data.message;
                 contactForm.reset();
             })
-            .catch(error => {
+            .catch(function (error) {
                 formStatus.className = 'form-status error';
-                formStatus.textContent = 'There was a problem sending your message. Please try again later or email us directly.';
+                formStatus.textContent = "We couldn't send your message. Please try again, or email contact@generalconcepts.ai directly.";
                 console.error('Error:', error);
+            })
+            .finally(function () {
+                if (submitBtn) { submitBtn.disabled = false; }
             });
         });
     }
-}); 
+});
