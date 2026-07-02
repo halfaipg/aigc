@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // whenever a jump can have happened.
         revealInView();
         window.addEventListener('load', revealInView);
+        window.addEventListener('pageshow', revealInView);
         window.addEventListener('hashchange', revealInView);
-        window.addEventListener('scroll', revealInView, { passive: true });
     }
 
     // Scrollspy: highlight the nav link for the section in view

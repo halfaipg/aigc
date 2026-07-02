@@ -514,23 +514,8 @@ p {
   font-weight: 600;
 }
 
-.rag-diagram {
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-panel);
-  padding: 1.75rem;
-}
 
-.rag-diagram svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  font-family: var(--font-sans);
-}
 
-.rag-diagram .diagram-label {
-  font-family: var(--font-mono);
-}
 
 /* Roadmap */
 .roadmap {
@@ -912,3 +897,28 @@ section[id],
   background: transparent !important;
   box-shadow: none !important;
 }
+
+/* GPU hosting: stat tiles (distinct layout family from .about-facts) */
+.gpu-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0;
+}
+.gpu-tile {
+  border: 1px solid var(--border-color, #2a2a30);
+  border-radius: 14px;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.gpu-tile:last-child { grid-column: 1 / -1; }
+.gpu-tile dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #84848d;
+  margin-bottom: 6px;
+}
+.gpu-tile dd { margin: 0; color: #ececef; font-weight: 500; }
+@media (max-width: 640px) { .gpu-tiles { grid-template-columns: 1fr; } }
