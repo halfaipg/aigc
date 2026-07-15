@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 name: document.getElementById('name').value,
                 company: document.getElementById('company').value,
                 email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
                 message: document.getElementById('message').value,
                 website: contactForm.querySelector('input[name="website"]') ? contactForm.querySelector('input[name="website"]').value : ''
             };
