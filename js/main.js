@@ -113,6 +113,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            var turnstileToken = contactForm.querySelector('input[name="cf-turnstile-response"]');
+            if (!turnstileToken || !turnstileToken.value) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Please complete the verification and try again.';
+                formStatus.style.display = 'block';
+                return;
+            }
+
             var formData = {
                 site: 'generalconcepts.ai',
                 name: document.getElementById('name').value,
@@ -120,7 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 message: document.getElementById('message').value,
-                website: contactForm.querySelector('input[name="website"]') ? contactForm.querySelector('input[name="website"]').value : ''
+                website: contactForm.querySelector('input[name="website"]') ? contactForm.querySelector('input[name="website"]').value : '',
+                'cf-turnstile-response': turnstileToken.value
             };
 
             var submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -161,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .finally(function () {
                 if (submitBtn) { submitBtn.disabled = false; }
+                if (window.turnstile) { window.turnstile.reset(); }
             });
         });
     }
