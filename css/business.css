@@ -1,0 +1,81 @@
+/* Business-facing presentation, shared by the two independently deployed sites. */
+:root {
+  --bg: #ffffff;
+  --bg-raised: #f3f6f8;
+  --surface: #ffffff;
+  --border: #dce2e6;
+  --border-strong: #b8c3cc;
+  --text: #1d252b;
+  --text-2: #47545f;
+  --text-3: #586874;
+  --accent: #25628f;
+  --accent-strong: #205f99;
+  --accent-hover: #164c7d;
+  --radius-panel: 8px;
+}
+body::after, .hero::before { display: none; }
+h1, h2, h3, .eyebrow, .brand-name, .fact dt, .contact-row dt, .gpu-tile dt { letter-spacing: 0; }
+h2 { font-size: 2rem; line-height: 1.2; }
+.header { background: rgba(255,255,255,.97); backdrop-filter: none; }
+.container { max-width: 1200px; padding-inline: 2rem; }
+.hero {
+  margin-top: var(--header-h);
+  padding: 4rem 0;
+  background: #171d22 url('../images/infrastructure-aisle.jpg') center 48% / cover;
+  isolation: isolate;
+}
+.hero::after { content: ""; position: absolute; inset: 0; background: rgba(13,20,26,.76); z-index: -1; }
+.hero-grid { display: block; }
+.hero-copy { max-width: 760px; }
+.hero-visual { display: none; }
+.hero h1 { color: #ffffff; font-size: 3.5rem; line-height: 1.1; }
+.hero .eyebrow { color: #c8d7e1; font-family: var(--font-sans); font-size: .875rem; text-transform: none; }
+.hero-offer { color: #fff; font-size: 2rem; max-width: 29ch; }
+.hero-sub { color: #e0e7ec; font-size: 1.125rem; max-width: 59ch; margin-block: 1.25rem 2rem; }
+.hero .btn-ghost { color: #fff; border-color: #b0bec9; }
+.hero .btn-ghost:hover { background: #283944; }
+.btn { min-height: 44px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; }
+.about, .services, .rag, .roadmap, .contact { padding: 4.5rem 0; }
+.about-grid, .rag-grid, .contact-grid { gap: 3rem; }
+.services-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+.services-intro { position: static; max-width: 680px; }
+.services-list { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2.25rem; }
+.service { padding-top: 1.5rem; border-color: #bcc9d2; }
+.service h3 { font-size: 1.2rem; }
+.infra { background: #eaf1f7; padding: 4rem 0; }
+.infra h2 { font-size: 2rem; }
+.infra-inner { max-width: 850px; }
+.infra-points { gap: 1rem 2rem; }
+.infra-points li { border: 0; border-radius: 0; border-left: 3px solid var(--accent); background: none; font-family: var(--font-sans); padding: .25rem 0 .25rem .75rem; }
+.gpu-tiles { display: block; }
+.gpu-tile { border: 0; border-top: 1px solid var(--border); padding: 1rem 0; border-radius: 0; background: none; }
+.gpu-tile dt { color: var(--text-3); }
+.gpu-tile dd { color: var(--text); }
+.steps { max-width: none; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2.5rem; }
+.step { grid-template-columns: 2rem 1fr; gap: 1rem; }
+.step-num { font-size: 1.4rem; }
+.contact-form { box-shadow: 0 8px 30px rgba(30,45,55,.05); }
+.form-status.success { color: #176639; }
+.form-status.error { color: #a02029; }
+.footer { background: #182128; --text: #fff; --text-2: #d6e0e6; --text-3: #b6c4ce; --border: #3b4852; }
+html.js .reveal { opacity: 1; transform: none; transition: none; }
+a, button, input, textarea { touch-action: manipulation; }
+.rag-benefits a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 1000px) {
+  .nav ul { gap: 1rem; }
+  .services-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 768px) {
+  .container { padding-inline: 1.25rem; }
+  .hero { padding: 3rem 0; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-offer { font-size: 1.65rem; }
+  h2, .infra h2 { font-size: 1.75rem; }
+  .services-list, .steps { grid-template-columns: 1fr; }
+  .about, .services, .rag, .roadmap, .contact, .infra { padding-block: 3rem; }
+  .contact-form { padding: 1.25rem; }
+  .hero-actions { gap: .75rem; }
+  .hero-actions .btn { flex: 1 1 220px; }
+  .brand-name { white-space: normal; line-height: 1.2; }
+}
+
